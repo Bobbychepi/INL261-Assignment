@@ -12,3 +12,4 @@ Generating HTML, CSS, and JavaScript code for the assigned website sections via 
 Reviewing the generated code for correctness, responsiveness, and animations
 Testing the code locally in VS Code on localhost
 Capturing screenshots of the Claude Project and Artifact outputs for documentation
+Link: https://inl-261-assignment.vercel.app/
