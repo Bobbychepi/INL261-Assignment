@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. Alex Morgan — Belgium Campus Lecturer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ========== STICKY NAVIGATION ========== -->
+  <nav id="navbar" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">AM<span class="dot">.</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" role="list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#modules">Modules</a></li>
+        <li><a href="#superpowers">Superpowers</a></li>
+        <li><a href="#quotes">Quotes</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section id="hero" aria-label="Hero introduction">
+      <canvas id="particle-canvas" aria-hidden="true"></canvas>
+      <div class="hero-grid" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <!-- Animated SVG Avatar -->
+        <div class="avatar-wrap" aria-label="Animated cartoon lecturer avatar">
+          <svg class="avatar-svg" viewBox="0 0 200 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cartoon lecturer">
+            <defs>
+              <radialGradient id="headGrad" cx="50%" cy="40%" r="60%">
+                <stop offset="0%" stop-color="#fde8cc"/>
+                <stop offset="100%" stop-color="#f4c48e"/>
+              </radialGradient>
+              <radialGradient id="bodyGrad" cx="50%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#2d4a8a"/>
+                <stop offset="100%" stop-color="#1a2f5e"/>
+              </radialGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <!-- Glow ring -->
+            <circle class="avatar-ring" cx="100" cy="110" r="82" fill="none" stroke-width="2"/>
+
+            <!-- Body / jacket -->
+            <rect class="avatar-body" x="52" y="155" width="96" height="62" rx="14" fill="url(#bodyGrad)"/>
+            <!-- Shirt collar -->
+            <polygon class="avatar-collar" points="100,157 88,175 100,180 112,175" fill="#fff"/>
+            <polygon class="avatar-collar-l" points="84,157 90,175 74,157" fill="#e8e8e8"/>
+            <polygon class="avatar-collar-r" points="116,157 110,175 126,157" fill="#e8e8e8"/>
+            <!-- Tie -->
+            <polygon class="avatar-tie" points="100,161 95,180 100,184 105,180" fill="#e84b6a"/>
+
+            <!-- Head -->
+            <ellipse cx="100" cy="112" rx="40" ry="42" fill="url(#headGrad)"/>
+
+            <!-- Hair -->
+            <path class="avatar-hair" d="M60,104 Q63,70 100,67 Q137,70 140,104 Q134,76 100,73 Q66,76 60,104Z" fill="#3d2b1f"/>
+            <!-- Side burns -->
+            <rect x="60" y="104" width="8" height="14" rx="3" fill="#3d2b1f"/>
+            <rect x="132" y="104" width="8" height="14" rx="3" fill="#3d2b1f"/>
+
+            <!-- Ears -->
+            <ellipse cx="60" cy="112" rx="6" ry="8" fill="#f4c48e"/>
+            <ellipse cx="140" cy="112" rx="6" ry="8" fill="#f4c48e"/>
+            <ellipse cx="60" cy="112" rx="3.5" ry="5" fill="#e8a97a"/>
+            <ellipse cx="140" cy="112" rx="3.5" ry="5" fill="#e8a97a"/>
+
+            <!-- Eyes (blink group) -->
+            <g class="avatar-blink-group">
+              <ellipse cx="87" cy="109" rx="8" ry="9" fill="#fff"/>
+              <ellipse cx="113" cy="109" rx="8" ry="9" fill="#fff"/>
+              <circle cx="89" cy="110" r="5" fill="#3d2b1f"/>
+              <circle cx="115" cy="110" r="5" fill="#3d2b1f"/>
+              <circle cx="91" cy="108" r="2" fill="#fff"/>
+              <circle cx="117" cy="108" r="2" fill="#fff"/>
+            </g>
+
+            <!-- Eyebrows -->
+            <path d="M80,100 Q87,96 94,100" stroke="#3d2b1f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M106,100 Q113,96 120,100" stroke="#3d2b1f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+            <!-- Glasses frames -->
+            <rect x="79" y="102" width="17" height="14" rx="6" fill="none" stroke="#1a1a3e" stroke-width="2.2"/>
+            <rect x="104" y="102" width="17" height="14" rx="6" fill="none" stroke="#1a1a3e" stroke-width="2.2"/>
+            <line x1="96" y1="109" x2="104" y2="109" stroke="#1a1a3e" stroke-width="2"/>
+            <line x1="79" y1="107" x2="65" y2="104" stroke="#1a1a3e" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="121" y1="107" x2="135" y2="104" stroke="#1a1a3e" stroke-width="1.8" stroke-linecap="round"/>
+
+            <!-- Nose -->
+            <path d="M97,115 Q100,122 103,115" stroke="#d4956b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+            <!-- Smile -->
+            <path class="avatar-smile" d="M88,127 Q100,138 112,127" stroke="#c07a50" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+
+            <!-- Book held in arm -->
+            <rect class="avatar-book" x="140" y="160" width="22" height="30" rx="2" fill="#e84b6a"/>
+            <rect x="143" y="160" width="3" height="30" fill="#c73958"/>
+            <line x1="148" y1="167" x2="160" y2="167" stroke="#fff" stroke-width="1.5" opacity="0.7"/>
+            <line x1="148" y1="172" x2="160" y2="172" stroke="#fff" stroke-width="1.5" opacity="0.7"/>
+            <line x1="148" y1="177" x2="160" y2="177" stroke="#fff" stroke-width="1.5" opacity="0.7"/>
+            <text x="148" y="163" font-size="5" fill="#fff" opacity="0.8">BC</text>
+
+            <!-- Floating decorative stars -->
+            <text class="float-star s1" x="22" y="85" font-size="14" fill="#00e8c8" opacity="0.8">✦</text>
+            <text class="float-star s2" x="162" y="72" font-size="10" fill="#ff6b9d" opacity="0.8">✦</text>
+            <text class="float-star s3" x="15" y="148" font-size="8" fill="#ffd700" opacity="0.6">✦</text>
+            <text class="float-star s4" x="172" y="150" font-size="12" fill="#00e8c8" opacity="0.5">✦</text>
+          </svg>
+        </div>
+
+        <!-- Name reveal text -->
+        <div class="hero-text">
+          <p class="hero-pre">Belgium Campus Presents</p>
+          <h1 class="hero-name">
+            <span class="name-word" style="--d:0">Dr.</span>
+            <span class="name-word accent" style="--d:1">Alex</span>
+            <span class="name-word" style="--d:2">Morgan</span>
+          </h1>
+          <p class="hero-title">
+            <span class="bracket">[</span>
+            Senior Lecturer · Computer Science &amp; Innovation
+            <span class="bracket">]</span>
+          </p>
+          <div class="hero-tags">
+            <span class="tag">AI &amp; ML</span>
+            <span class="tag">Web Systems</span>
+            <span class="tag">HCI</span>
+          </div>
+          <a href="#about" class="hero-cta">Explore ↓</a>
+        </div>
+      </div>
+
+      <!-- Decorative corner brackets -->
+      <div class="corner tl" aria-hidden="true"></div>
+      <div class="corner tr" aria-hidden="true"></div>
+      <div class="corner bl" aria-hidden="true"></div>
+      <div class="corner br" aria-hidden="true"></div>
+    </section>
+
+    <!-- ========== ABOUT SECTION ========== -->
+    <section id="about" aria-labelledby="about-h">
+      <div class="container">
+        <div class="sec-label">01 / About</div>
+        <h2 id="about-h" class="sec-title">The Human<br /><em>Behind the Board</em></h2>
+
+        <div class="about-grid">
+          <!-- Bio card with typing animation -->
+          <article class="bio-card">
+            <div class="bio-body">
+              <p>Hello, world! I'm a passionate educator with over <strong>10 years</strong> of experience transforming complex ideas into lightbulb moments. My classrooms are part laboratory, part debate hall — and occasionally, part comedy club.</p>
+              <p class="bio-typing" aria-live="polite"></p>
+            </div>
+            <div class="bio-stats">
+              <div class="stat"><span class="stat-n">10+</span><span class="stat-l">Years Teaching</span></div>
+              <div class="stat"><span class="stat-n">8</span><span class="stat-l">Modules</span></div>
+              <div class="stat"><span class="stat-n">500+</span><span class="stat-l">Students Inspired</span></div>
+            </div>
+          </article>
+
+          <!-- Personality trait icons -->
+          <div class="traits-grid" role="list" aria-label="Personality traits">
+            <div class="trait" role="listitem" tabindex="0"><span class="t-icon">🧠</span><span class="t-label">Deep Thinker</span></div>
+            <div class="trait" role="listitem" tabindex="0"><span class="t-icon">🎯</span><span class="t-label">Goal-Driven</span></div>
+            <div class="trait" role="listitem" tabindex="0"><span class="t-icon">🔥</span><span class="t-label">Passionate</span></div>
+            <div class="trait" role="listitem" tabindex="0"><span class="t-icon">🤝</span><span class="t-label">Collaborative</span></div>
+            <div class="trait" role="listitem" tabindex="0"><span class="t-icon">💡</span><span class="t-label">Innovative</span></div>
+            <div class="trait" role="listitem" tabindex="0"><span class="t-icon">☕</span><span class="t-label">Coffee-Powered</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== MODULES SECTION ========== -->
+    <section id="modules" aria-labelledby="modules-h">
+      <div class="container">
+        <div class="sec-label">02 / Modules</div>
+        <h2 id="modules-h" class="sec-title">Modules &amp;<br /><em>Expertise</em></h2>
+
+        <div class="modules-grid" role="list">
+
+          <article class="flip-card" role="listitem" tabindex="0">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-emoji">💻</span>
+                <h3>Intro to Programming</h3>
+                <p class="card-year">1st Year · Core</p>
+                <span class="flip-hint">hover / tap to explore</span>
+              </div>
+              <div class="flip-back">
+                <h3>Intro to Programming</h3>
+                <p>Foundations of algorithmic thinking, Python basics, problem decomposition, and your first "Hello, World!" moment.</p>
+                <ul><li>Python 3</li><li>Algorithms</li><li>Data Structures</li></ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="flip-card" role="listitem" tabindex="0">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-emoji">🌐</span>
+                <h3>Web Development</h3>
+                <p class="card-year">2nd Year · Core</p>
+                <span class="flip-hint">hover / tap to explore</span>
+              </div>
+              <div class="flip-back">
+                <h3>Web Development</h3>
+                <p>Full-stack development from semantic HTML to responsive design and RESTful APIs.</p>
+                <ul><li>HTML/CSS/JS</li><li>Node.js</li><li>REST APIs</li></ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="flip-card" role="listitem" tabindex="0">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-emoji">🤖</span>
+                <h3>Artificial Intelligence</h3>
+                <p class="card-year">3rd Year · Elective</p>
+                <span class="flip-hint">hover / tap to explore</span>
+              </div>
+              <div class="flip-back">
+                <h3>Artificial Intelligence</h3>
+                <p>From search algorithms to neural networks — exploring how machines think, learn, and occasionally hallucinate.</p>
+                <ul><li>Machine Learning</li><li>Neural Networks</li><li>Ethics in AI</li></ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="flip-card" role="listitem" tabindex="0">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-emoji">🖱️</span>
+                <h3>Human-Computer Interaction</h3>
+                <p class="card-year">2nd Year · Core</p>
+                <span class="flip-hint">hover / tap to explore</span>
+              </div>
+              <div class="flip-back">
+                <h3>HCI</h3>
+                <p>Designing systems that humans actually enjoy using. Usability, accessibility, and the psychology behind great UX.</p>
+                <ul><li>UX Research</li><li>Prototyping</li><li>Accessibility</li></ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="flip-card" role="listitem" tabindex="0">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-emoji">🗄️</span>
+                <h3>Database Systems</h3>
+                <p class="card-year">2nd Year · Core</p>
+                <span class="flip-hint">hover / tap to explore</span>
+              </div>
+              <div class="flip-back">
+                <h3>Database Systems</h3>
+                <p>Relational and NoSQL databases, query optimisation, and why your data model matters more than you think.</p>
+                <ul><li>SQL / NoSQL</li><li>ER Modelling</li><li>Optimisation</li></ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="flip-card" role="listitem" tabindex="0">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-emoji">🚀</span>
+                <h3>Innovation &amp; Entrepreneurship</h3>
+                <p class="card-year">3rd Year · Elective</p>
+                <span class="flip-hint">hover / tap to explore</span>
+              </div>
+              <div class="flip-back">
+                <h3>Innovation &amp; Entrepreneurship</h3>
+                <p>Turning ideas into impact. Business models, lean startup methodology, and pitching with confidence.</p>
+                <ul><li>Design Thinking</li><li>Lean Startup</li><li>Pitching</li></ul>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SUPERPOWERS SECTION ========== -->
+    <section id="superpowers" aria-labelledby="powers-h">
+      <div class="container">
+        <div class="sec-label">03 / Superpowers</div>
+        <h2 id="powers-h" class="sec-title">Fun Facts &amp;<br /><em>Superpowers</em></h2>
+        <p class="sec-sub">Click or tap each card to reveal the secret.</p>
+
+        <div class="powers-grid" role="list">
+          <button class="power-card" aria-expanded="false">
+            <div class="pf"><span class="pe">👃</span><span class="pn">Debug by Smell</span></div>
+            <div class="pr">Can detect an off-by-one error before the IDE even highlights it. It's a gift. Possibly a curse.</div>
+          </button>
+          <button class="power-card" aria-expanded="false">
+            <div class="pf"><span class="pe">☕</span><span class="pn">Infinite Coffee Tolerance</span></div>
+            <div class="pr">Fuelled entirely by espresso. Once marked 60 papers, two cups in. No one was harmed.</div>
+          </button>
+          <button class="power-card" aria-expanded="false">
+            <div class="pf"><span class="pe">🖊️</span><span class="pn">Whiteboard Whisperer</span></div>
+            <div class="pr">Can explain recursion using only a mirror and a dramatic pause. Results may vary.</div>
+          </button>
+          <button class="power-card" aria-expanded="false">
+            <div class="pf"><span class="pe">📡</span><span class="pn">Stack Overflow Sensor</span></div>
+            <div class="pr">Has memorised 3,000+ error messages. Knows which ones you pasted straight from Stack Overflow. Yes, including that one.</div>
+          </button>
+          <button class="power-card" aria-expanded="false">
+            <div class="pf"><span class="pe">⏱️</span><span class="pn">Time Manipulation</span></div>
+            <div class="pr">Somehow turns a 50-minute lecture into what feels like 10 minutes. Students have filed complaints — of the positive kind.</div>
+          </button>
+          <button class="power-card" aria-expanded="false">
+            <div class="pf"><span class="pe">😂</span><span class="pn">Meme Pedagogy</span></div>
+            <div class="pr">Every concept has an accompanying meme. Bubble sort? There's a meme. The OSI model? Multiple memes. Git conflicts? Don't ask.</div>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== QUOTE WALL ========== -->
+    <section id="quotes" aria-labelledby="quotes-h">
+      <div class="container">
+        <div class="sec-label">04 / Words</div>
+        <h2 id="quotes-h" class="sec-title">The Quote<br /><em>Wall</em></h2>
+
+        <div class="quote-carousel" aria-live="polite" aria-label="Rotating lecture quotes">
+          <div class="quote-track">
+            <blockquote class="quote active">
+              <p>"The best code is code you don't have to write — but you'll write a lot before you understand why."</p>
+              <footer>— On elegant design</footer>
+            </blockquote>
+            <blockquote class="quote">
+              <p>"A deadline isn't just a date — it's a conversation your present self has with your future self about trust."</p>
+              <footer>— On time management</footer>
+            </blockquote>
+            <blockquote class="quote">
+              <p>"Reading documentation is not a sign of weakness. It's the mark of someone who actually wants to finish the project."</p>
+              <footer>— On professional habits</footer>
+            </blockquote>
+            <blockquote class="quote">
+              <p>"Fail fast, fail forward, fail interestingly. Boring failures are a waste of everyone's time."</p>
+              <footer>— On iteration</footer>
+            </blockquote>
+            <blockquote class="quote">
+              <p>"Your first version is supposed to be terrible. That's not a bug — that's the process working exactly as intended."</p>
+              <footer>— On prototyping</footer>
+            </blockquote>
+          </div>
+          <div class="quote-controls">
+            <button id="qprev" aria-label="Previous quote">←</button>
+            <div class="qdots"></div>
+            <button id="qnext" aria-label="Next quote">→</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CONTACT SECTION ========== -->
+    <section id="contact" aria-labelledby="contact-h">
+      <div class="container">
+        <div class="sec-label">05 / Connect</div>
+        <h2 id="contact-h" class="sec-title">Office Hours &amp;<br /><em>Connect</em></h2>
+
+        <div class="contact-grid">
+          <article class="office-card">
+            <div class="card-head"><span>🗓️</span> Office Hours</div>
+            <ul class="hours-list">
+              <li><span class="day">Monday</span><span class="time">10:00 – 12:00</span></li>
+              <li><span class="day">Wednesday</span><span class="time">14:00 – 16:00</span></li>
+              <li><span class="day">Friday</span><span class="time">09:00 – 11:00</span></li>
+            </ul>
+            <p class="card-note">📍 Room B204 — knock before entering, unless you smell smoke.</p>
+          </article>
+
+          <article class="dept-card">
+            <div class="card-head"><span>🏛️</span> Department</div>
+            <p class="dept-name">School of Information &amp; Communication Technology</p>
+            <p class="dept-campus">Belgium Campus iTversity</p>
+            <p class="dept-loc">📍 Pretoria, South Africa</p>
+            <hr class="card-divider" />
+            <p class="card-note">For academic enquiries, use the student portal or visit during office hours.</p>
+          </article>
+
+          <div class="cta-card">
+            <p class="cta-pre">Ready to learn something new?</p>
+            <h3 class="cta-heading">Let's build the future — one line of code at a time.</h3>
+            <a href="#hero" class="cta-btn">
+              <span>Start Exploring</span>
+              <span class="btn-arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="footer-inner">
+      <p>Dr. Alex Morgan · Belgium Campus iTversity · <span id="yr"></span></p>
+      <p class="footer-quote">Teaching is the art of making yourself unnecessary.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
